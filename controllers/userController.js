@@ -76,8 +76,8 @@ module.exports = {
     allEmploye : async (req, res) => {
         const page = req.query.page || 1
         const limit = 6
-        const sort = "ASC"
-        const sortBy = "name"
+        const sort = req.query.sort || "ASC"
+        const sortBy = req.query.sortBy || "name"
         const totalKaryawan = await user.count({
             where : {isAdmin : 0}
         })
@@ -115,12 +115,26 @@ module.exports = {
     addSalary : async (req, res) => {
         try {
             const {gaji, userId} = req.body
-            const result = await salary.create(
-                {salary : gaji, userId : userId}
+            const check = await salary.findOne({
+                where : {userId : userId}
+            })
+            if (!check) {
+                const result = await salary.create(
+                    {salary : gaji, userId : userId}
+                    )
+                    res.status(200).send({
+                        message : "Berhasil Menambahkan Gaji Karyawan"
+                    })
+            }
+            else{
+                await salary.update(
+                    {salary : gaji},
+                    {where : {userId : userId}}
                 )
                 res.status(200).send({
-                    message : "Berhasil Menambahkan Gaji Karyawan"
+                    message : "Berhasil Mengganti Gaji Karyawan"
                 })
+            }
         } catch (error) {
             res.status(400).send(error)
         }
