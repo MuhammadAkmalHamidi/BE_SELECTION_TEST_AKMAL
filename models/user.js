@@ -6,8 +6,9 @@ module.exports = (sequelize, DataTypes) => {
   class user extends Model {
     static associate(models) {
       user.hasMany(models.dataAbsen)
-      user.hasOne(models.role)
+      user.belongsTo(models.role)
       user.hasOne(models.salaries)
+      user.hasOne(models.jadwal)
     }
   }
   user.init({
@@ -23,11 +24,6 @@ module.exports = (sequelize, DataTypes) => {
     phoneNumber : {
       type : DataTypes.STRING,
       allowNull : false,
-    },
-    isAdmin : {
-      type : DataTypes.BOOLEAN,
-      allowNull : false,
-      defaultValue : false
     },
     birthDay:{
       type: DataTypes.DATEONLY,

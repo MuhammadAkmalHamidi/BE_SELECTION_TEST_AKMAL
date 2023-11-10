@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class dataAbsen extends Model {
     static associate(models) {
       dataAbsen.belongsTo(models.user)
+      dataAbsen.belongsTo(models.shift)
     }
   }
   dataAbsen.init({
@@ -20,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     dailySalary : {
       type : DataTypes.INTEGER,
       allowNull : false
-    }
+    },
   }, {
     sequelize,
     modelName: 'dataAbsen',

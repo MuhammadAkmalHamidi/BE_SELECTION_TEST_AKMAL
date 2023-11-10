@@ -3,22 +3,23 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class role extends Model {
+  class shift extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      role.hasOne(models.user)
+      shift.hasMany(models.dataAbsen)
+      shift.hasMany(models.jadwal)
     }
   }
-  role.init({
-    roleName: DataTypes.STRING
+  shift.init({
+    shift: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'role',
+    modelName: 'shift',
     timestamps: false
   });
-  return role;
+  return shift;
 };
