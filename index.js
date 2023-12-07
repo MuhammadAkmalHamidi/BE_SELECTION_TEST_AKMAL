@@ -1,8 +1,9 @@
 require('dotenv').config()
 const express = require('express')
-const PORT = 3307
+const PORT = 3600
 const db = require('./models')
 const { userRouter, absenRouter, salaryRouter, jadwalRouter } = require('./routers')
+const cors = require('cors')
 
 const app = (express())
 app.use(express.json())
