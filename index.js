@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-const PORT = 3600;
+const PORT = 2000;
 const db = require("./models");
 const {
   userRouter,
@@ -31,6 +31,9 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
+app.get("/test", (req, res) => {
+  res.send("Hello World!");
+});
 
 app.use("/user", userRouter);
 app.use("/absen", absenRouter);
