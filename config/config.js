@@ -1,4 +1,5 @@
 require("dotenv").config();
+import mysql2 from "mysql2";
 
 module.exports = {
   development: {
@@ -21,5 +22,6 @@ module.exports = {
     database: "sql12668401",
     host: "sql12.freesqldatabase.com",
     dialect: "mysql",
+    dialectModule: mysql2,
   },
 };
